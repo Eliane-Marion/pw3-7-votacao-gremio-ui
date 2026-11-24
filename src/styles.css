@@ -1,0 +1,8 @@
+body { margin: 0; font-family: Arial, sans-serif; color: #222; }
+main { max-width: 1000px; margin: 30px auto; padding: 24px; }
+button, .botao { display: inline-block; padding: 8px 12px; margin: 3px; border: 0; border-radius: 4px; background: #2563eb; color: white; cursor: pointer; text-decoration: none; font: inherit; }
+button:disabled { opacity: .5; cursor: not-allowed; }
+.secundario { background: #64748b; }
+.excluir { background: #dc2626; }
+.sucesso { color: #166534; }
+.erro { color: #b91c1c; }

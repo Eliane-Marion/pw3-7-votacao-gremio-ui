@@ -1,0 +1,33 @@
+<main>
+  <header>
+    <h1>Votacao do gremio</h1>
+    <a class="botao" routerLink="/candidatos/novo">Novo candidato</a>
+  </header>
+  <h2>Candidatos</h2>
+  @if (carregando()) { <p>Carregando...</p> }
+  <table>
+    <thead>
+      <tr><th>ID</th><th>Nome</th><th>Categoria</th><th>Votos</th><th>Situacao</th><th>Acoes</th></tr>
+    </thead>
+    <tbody>
+      @for (candidato of candidatos(); track candidato.id) {
+        <tr>
+          <td>{{ candidato.id }}</td>
+          <td>{{ candidato.nome }}</td>
+          <td>{{ candidato.categoria }}</td>
+          <td>{{ candidato.quantidadeVotos }}</td>
+          <td><span class="status" [class.eleito]="candidato.eleito" [class.nao-eleito]="!candidato.eleito">{{ candidato.eleito ? 'Eleito' : 'Nao eleito' }}</span></td>
+          <td>
+            <button type="button" (click)="votar(candidato.id)" [disabled]="carregando()">Votar</button>
+            <a class="botao secundario" [routerLink]="['/candidatos', candidato.id, 'editar']">Editar</a>
+            <button type="button" class="excluir" (click)="excluir(candidato.id)" [disabled]="carregando()">Excluir</button>
+          </td>
+        </tr>
+      } @empty {
+        @if (!carregando() && !erro()) { <tr><td colspan="6">Nenhum candidato cadastrado.</td></tr> }
+      }
+    </tbody>
+  </table>
+  @if (mensagem()) { <p class="sucesso">{{ mensagem() }}</p> }
+  @if (erro()) { <p class="erro">{{ erro() }}</p> }
+</main>

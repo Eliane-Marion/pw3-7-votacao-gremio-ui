@@ -1,0 +1,21 @@
+<main>
+  <h1>{{ id === null ? 'Cadastrar candidato' : 'Editar candidato' }}</h1>
+  @if (carregando()) { <p>Carregando candidato...</p> }
+  <form [formGroup]="formulario" (ngSubmit)="salvar()">
+    <label for="nome">Nome</label>
+    <input id="nome" type="text" formControlName="nome" maxlength="120">
+    @if (formulario.controls.nome.invalid && formulario.controls.nome.touched) {
+      <small class="erro">Informe um nome de 2 a 120 caracteres.</small>
+    }
+    <label for="categoria">Categoria</label>
+    <input id="categoria" type="text" formControlName="categoria" maxlength="60">
+    @if (formulario.controls.categoria.invalid && formulario.controls.categoria.touched) {
+      <small class="erro">Informe uma categoria de 2 a 60 caracteres.</small>
+    }
+    <div>
+      <button type="submit" [disabled]="!pronto() || enviando()">{{ enviando() ? 'Salvando...' : 'Salvar' }}</button>
+      <a class="botao secundario" routerLink="/candidatos">Cancelar / Voltar</a>
+    </div>
+  </form>
+  @if (erro()) { <p class="erro">{{ erro() }}</p> }
+</main>
